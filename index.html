@@ -1,0 +1,176 @@
+<html>
+  <head>
+    <title>CV</title>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='./style.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <p id="title">CV</p>
+    <div id="timeline">
+      <svg></svg>
+    </div>
+    <p id="description"></p>
+  </body>
+  <script>
+   
+   var color = d3.scale.category10();
+   
+   var x = d3.time.scale();
+
+   var y = d3.scale.ordinal();
+
+   var x_axis = d3.svg.axis()
+                  .scale(x)
+                  .orient("bottom")
+                  .tickFormat(d3.time.format('%y'))
+
+   var y_axis = d3.svg.axis()
+                  .scale(y)
+                  .orient("right");
+
+   var svg = d3.select('#timeline svg');
+
+   d3.text('./cv.org', function(cv) {
+       var data = cv2json(cv);
+
+       var jobs = data[0].d.concat(data[1].d);
+       var letter = data[2].description;
+
+       d3.select('#description').text(letter);       
+
+       var min_date = d3.min(jobs, function(d) { return d.start });
+       var max_date = d3.max(jobs, function(d) { return d.stop });
+
+       x.domain([min_date, max_date]);
+       y.domain(jobs.map(function(d) { return d.title }));
+       
+       svg.selectAll('.job')
+          .data(jobs)
+          .enter()
+          .append('g')
+          .on('mouseover', function(d, i) {
+              d3.select('#description').text(d.description);
+          })
+          .on('mouseout', function(d) {
+              d3.select('#description').text(letter);
+          })
+          .attr('class', 'job')
+          .append('rect')
+          .attr('fill', function(d) {
+              return color(d.title);
+          })
+          .attr('opacity', function(d) {
+              return d.intensity / 5 / 1;
+          });
+
+       svg.append('g')
+          .attr('class', 'y axis');
+       
+       svg.append('g')
+          .attr('class', 'x axis');
+
+       resize();
+       d3.select(window).on('resize', resize)
+
+   });
+
+   function resize() {
+
+       var padding = 40;
+       
+       var width  = parseInt(d3.select('#timeline').style('width')) - padding;
+       var height  = parseInt(d3.select('#timeline').style('height')) - padding;
+       
+       x.range([padding, width]);
+       
+       y.rangeRoundBands([padding, height], .1);
+       
+       d3.select('.x.axis')
+         .attr('transform', 'translate(0,' + height + ')')
+         .call(x_axis);
+       d3.select('.y.axis')
+         .attr('transform', 'translate(' + padding + ',0)')
+         .call(y_axis);
+       
+       
+       d3.selectAll('.job')
+         .attr('transform', function(d) {
+             return 'translate(' + x(d.start) + ',' + y(d.title) + ')';
+         });
+       
+       d3.selectAll('.job rect')
+         .attr('height', y.rangeBand)
+         .attr('width', function(d) {
+             return x(d.stop) - x(d.start);
+         });
+   };
+
+   function cv2json(d) {
+
+       var regexps = [
+           {r: /#.*/, name: 'ignore'},
+           {r: /(\*+)\s+(.*)/, name: 'level'},
+           {r: /\-\s+\/(.*)\/\s+\:\:\s+\/(.*)\s--\s(.*)\//, name: 'list_item'},
+           {r: /(.*)/, name: 'content'}
+       ];
+       
+       var data = []; 
+
+       d.split('\n').forEach(function(line) {
+           regexps.some(function(exp) {
+               
+               var match = exp.r.exec(line.trim());
+               if(!match || match[0] == "") return false;
+
+               switch (exp.name) {
+
+                   case 'ignore':
+                       break;
+
+                   case 'level':
+                       data.push({
+                           level: match[1].length,
+                           name: match[2],
+                           d: [],
+                           description: ""
+                       });
+                       break;
+
+                   case 'list_item':
+                       data[data.length-1].d.push({
+                           start: new Date(match[2]),
+                           stop: new Date(match[3]),
+                           title: match[1],
+                           description: ""
+                       });
+                       break;
+
+                   case 'content':
+                       d0 = data[data.length-1];
+                       d1 = d0.d;
+                       if(d1.length == 0) d0.description = line.trim();
+                       else {
+                           d = d1[d1.length-1];
+                           if(d) d.description = line.trim();
+                       }
+                       break;
+
+                   default:
+                       break;
+               };
+               
+               return true;
+           })
+       });
+
+       return data;
+   }
+
+  </script>
+</html>

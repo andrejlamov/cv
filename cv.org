@@ -1,0 +1,46 @@
+#+AUTHOR: Andrej Lamov
+#+TITLE: CV
+#+OPTIONS: H:2 toc:nil num:nil
+
+* Work Experience
+
+- /Master Thesis/ :: /2015 October -- 2016 April/ 
+     
+     Strings in Erlang.
+
+- /Develop Pit4 prototype/ :: /2015 January -- 2015 February/ 
+
+     Used flask, numpy, pandas and d3.js.
+  
+- /Develop project managing tool/ :: /2014 May -- 2014 September/ 
+
+     Used node, pandas and d3.js.
+
+- /Develop issue-ticket monitor/ :: /2013 May -- 2014 December/ 
+
+     Used node, perl, websockets, d3.js.
+
+- /Develop TTCN logger for Titan/ :: /2012 January -- 2012 September/ 
+
+     Used C++.
+  
+- /Develop Pit3/ :: /2011 January -- 2015 May/
+     
+     Used Scala and Java.
+
+- /Port Erlang to NIF/ :: /2010 June -- 2010 September/ 
+     
+     Used Erlang and C.
+     
+- /Examine ETS in Erlang// :: /2010 March  -- 2011 January/ 
+
+     Used Erlang.
+
+- /Assistant at Antikvariat PAN/ :: /2007 August -- 2014 January/
+     
+     Manage books/movie posters and guide/help customers.
+
+* Education
+- /Chalmers/ :: /2008 September -- 2016 April/ 
+* Cover Letter
+Hello. My name is Andrej Lamov. I need work.
