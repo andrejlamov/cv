@@ -109,6 +109,16 @@
        };
        
        resize();
+
+       d3.selectAll(id + ' .y.axis .tick')
+         .on('mouseover', function(_,i) {
+             var d = d3.selectAll(id + ' .job ').data()[i];
+             d3.select('#description').text(d.description);
+         })
+         .on('mouseout', function(d,i) {
+             d3.select('#description').text("");
+         });
+
        d3.select(window).on('resize', resize)
    };
 
