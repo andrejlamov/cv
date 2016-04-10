@@ -11,54 +11,56 @@
     <link href='./style.css' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <p id="title">CV</p>
-    <div id="timeline">
-      <svg></svg>
-    </div>
+    <h1>Work and Code Experience</h1>
+    <svg id="timeline"></svg>
     <p id="description"></p>
   </body>
   <script>
-   
-   var color = d3.scale.category10();
-   
-   var x = d3.time.scale();
-
-   var y = d3.scale.ordinal();
-
-   var x_axis = d3.svg.axis()
-                  .scale(x)
-                  .orient("bottom")
-                  .tickFormat(d3.time.format('%y'))
-
-   var y_axis = d3.svg.axis()
-                  .scale(y)
-                  .orient("right");
-
-   var svg = d3.select('#timeline svg');
 
    d3.text('./cv.org', function(cv) {
        var data = cv2json(cv);
+       var d = data['Work Experience'].d
+                                      .concat(data['Programming Experience'].d)
+                                      .concat(data['Just for fun'].d);
+       timeline('#timeline', d);
 
-       var jobs = data[0].d.concat(data[1].d);
-       var letter = data[2].description;
-
-       d3.select('#description').text(letter);       
-
-       var min_date = d3.min(jobs, function(d) { return d.start });
-       var max_date = d3.max(jobs, function(d) { return d.stop });
-
-       x.domain([min_date, max_date]);
-       y.domain(jobs.map(function(d) { return d.title }));
+   });
+   
+   function timeline(id, data) {
+   
+       var color = d3.scale.category10();
        
+       var x = d3.time.scale();
+       
+       var y = d3.scale.ordinal();
+       
+       var x_axis = d3.svg.axis()
+                      .scale(x)
+                      .orient("bottom")
+                      .tickFormat(d3.time.format('%y'));
+           
+       var y_axis = d3.svg.axis()
+                      .scale(y)
+                      .orient("right");
+       
+       var svg = d3.select(id);
+       
+
+       var min_date = d3.min(data, function(d) { return d.start });
+       var max_date = d3.max(data, function(d) { return d.stop });
+           
+       x.domain([min_date, max_date]);
+       y.domain(data.map(function(d) { return d.title }));
+           
        svg.selectAll('.job')
-          .data(jobs)
+          .data(data)
           .enter()
           .append('g')
           .on('mouseover', function(d, i) {
               d3.select('#description').text(d.description);
           })
           .on('mouseout', function(d) {
-              d3.select('#description').text(letter);
+              d3.select('#description').text("");
           })
           .attr('class', 'job')
           .append('rect')
@@ -66,49 +68,48 @@
               return color(d.title);
           })
           .attr('opacity', function(d) {
-              return d.intensity / 5 / 1;
+              return 0.7;
           });
-
+       
        svg.append('g')
           .attr('class', 'y axis');
        
        svg.append('g')
           .attr('class', 'x axis');
-
+       
+       var resize = function() {
+           
+           var padding = 40;
+           
+           var width  = parseInt(d3.select(id).style('width')) - padding;
+           var height  = parseInt(d3.select(id).style('height')) - padding;
+           
+           x.range([padding, width]);
+           
+           y.rangeRoundBands([padding, height], .1);
+           
+           d3.select(id + ' .x.axis')
+             .attr('transform', 'translate(0,' + height + ')')
+             .call(x_axis);
+           d3.select(id + ' .y.axis')
+             .attr('transform', 'translate(' + padding + ',0)')
+             .call(y_axis);
+           
+           
+           d3.selectAll(id + ' .job')
+             .attr('transform', function(d) {
+                 return 'translate(' + x(d.start) + ',' + y(d.title) + ')';
+             });
+           
+           d3.selectAll(id + ' .job rect')
+             .attr('height', y.rangeBand)
+             .attr('width', function(d) {
+                 return x(d.stop) - x(d.start);
+             });
+       };
+       
        resize();
        d3.select(window).on('resize', resize)
-
-   });
-
-   function resize() {
-
-       var padding = 40;
-       
-       var width  = parseInt(d3.select('#timeline').style('width')) - padding;
-       var height  = parseInt(d3.select('#timeline').style('height')) - padding;
-       
-       x.range([padding, width]);
-       
-       y.rangeRoundBands([padding, height], .1);
-       
-       d3.select('.x.axis')
-         .attr('transform', 'translate(0,' + height + ')')
-         .call(x_axis);
-       d3.select('.y.axis')
-         .attr('transform', 'translate(' + padding + ',0)')
-         .call(y_axis);
-       
-       
-       d3.selectAll('.job')
-         .attr('transform', function(d) {
-             return 'translate(' + x(d.start) + ',' + y(d.title) + ')';
-         });
-       
-       d3.selectAll('.job rect')
-         .attr('height', y.rangeBand)
-         .attr('width', function(d) {
-             return x(d.stop) - x(d.start);
-         });
    };
 
    function cv2json(d) {
@@ -143,9 +144,10 @@
                        break;
 
                    case 'list_item':
+                       var stop = match[3] == 'current' ? new Date() : new Date(match[3]);
                        data[data.length-1].d.push({
                            start: new Date(match[2]),
-                           stop: new Date(match[3]),
+                           stop: stop,
                            title: match[1],
                            description: ""
                        });
@@ -154,10 +156,10 @@
                    case 'content':
                        d0 = data[data.length-1];
                        d1 = d0.d;
-                       if(d1.length == 0) d0.description = line.trim();
+                       if(d1.length == 0) d0.description += line.trim();
                        else {
                            d = d1[d1.length-1];
-                           if(d) d.description = line.trim();
+                           if(d) d.description += line.trim();
                        }
                        break;
 
@@ -169,7 +171,12 @@
            })
        });
 
-       return data;
+       var result = {};
+       data.forEach(function(d) {
+           result[d.name] = d;
+       });
+       
+       return result;
    }
 
   </script>

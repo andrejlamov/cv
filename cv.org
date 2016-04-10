@@ -1,46 +1,98 @@
 #+AUTHOR: Andrej Lamov
 #+TITLE: CV
-#+OPTIONS: H:2 toc:nil num:nil
+#+AUTHOR: Andrej Lamov
+#+OPTIONS: H:2 toc:nil num:nil 
+
+* Introduction
+
+
+
+* Education
+- Chalmers :: /2008 September - current/
+
+     I study the master program /algorithms, languages and logic/, a specialization on Computer Science at Chalmers. I am about to finish my master thesis and will be done with all my courses at the end of this summer. Interesting courses for this job: /functional programming/, /advanced functional programming/, /parallel functional programming/, /algorithms/, /advanced algorithms/, /discrete optimization/, /types for programs and proofs/, /ai/ and /concurrent programming/. In theses courses I have used /haskell/, /agda/, /python/, /erlang/, /c/ and /java/.
 
 * Work Experience
 
-- /Master Thesis/ :: /2015 October -- 2016 April/ 
+- /Master Thesis/ :: /2015 October -- current/ 
      
-     Strings in Erlang.
+     The thesis explores different representations of string data in Erlang. Its context is Ericssons SGSN-MME, a massive concurrent Erlang system, running hundred of thousands of Erlang processes. I have examined Erlang and its virtual machine in detail, to find ways of working with strings more efficient. During the thesis I have mainly used /Erlang/, but also /C/, making changes to Erlangs virtual machine, that is written in C. I have visited the OTP team, the main developers of Erlang, in Stockholm and received feedback on the ideas presented in the thesis.
 
-- /Develop Pit4 prototype/ :: /2015 January -- 2015 February/ 
+- /Software Developer at Ericsson/ :: /2010 -- 2015/
 
-     Used flask, numpy, pandas and d3.js.
+     I worked as a software developer at Ericsson in parallel with my studies at Chalmers. At Ericsson I had the freedom to learn new languages, libraries and tools, which provided me with a lot of practical programming experience, that I would not have gained by only studying at Chalmers. I mainly developed in Scala, Erlang, python, javascript and C, learning libraries such as pandas, d3.js, flask, node.js and jfreechart.
+
+- /Assistant for a wheelchair bound student at Chalmers/ :: /2011 -- 2015/
+
+     Employed by Chalmers to help a wheelchair-bound student to get to different classrooms between lectures. 
+
+- /Assistant at bookstore Antikvariat PAN/ :: /2007 -- 2014/
+     
+     I sold books and movie-posters at a bookstore called Antikvariat PAN during weekends in parallel with my studies at Chalmers. The job mainly involved interacting with customers and guiding them through book shelves. I was often alone in the store, which thought me responsibility and to be customer-oriented.
+
+- /Assistent repairman at Data Assistent/ :: /2007 -- 2010/
+
+     Occasionally helped repairing computers and configure Linux.
+
+- /Telemarketing for the national union of the hearing impaired/ :: /2006 -- 2007/
+
+     Collect donations through telemarketing.
   
-- /Develop project managing tool/ :: /2014 May -- 2014 September/ 
+     
+* Programming Experience
 
-     Used node, pandas and d3.js.
 
-- /Develop issue-ticket monitor/ :: /2013 May -- 2014 December/ 
+- /Pit4 prototype/ :: /2015 January -- 2015 February/ 
 
-     Used node, perl, websockets, d3.js.
+     This prototype is a web-application for log visualization at Ericsson. The motivation behind this application was to solve the problem of rendering interactive graphs with a big amount of data-points in a web-browser. The application automatically adjusted the level-of-detail without loosing the most significant data, resulting in smooth performance, no matter the size of the unput dataset. The backend was based on the python libraries /flask/ and /pandas/, and the frontend on /d3.js/.
 
-- /Develop TTCN logger for Titan/ :: /2012 January -- 2012 September/ 
+- /Project managing tool/ :: /2014 May -- 2014 September/ 
 
-     Used C++.
+     This is a web-based application for planning and managing projects at Ericsson. It is currently  widely used by managers and now maintained by a team at Ericsson. Backend based on /node.js/ and frontend based on /d3.js/ 
+
+- /Issue-ticket monitor/ :: /2013 May -- 2014 December/ 
+     
+     This is a web-based application that visualizes the flow of issue-tickets through the different teams and shows their productivity. The backend was written in /node.js/ that communicated with the issue-report system through /perl/, and generated data for the frontend written in /d3.js/.
+     
+- /TTCN logger for Titan/ :: /2012 January -- 2012 September/ 
+
+     I helped to develop a logger for the Titan system at Ericsson. Titan is a  tool set based on the TTCN-3 scripting language, that is used for functional testing of communication systems. The logger was written in /C++/.
   
-- /Develop Pit3/ :: /2011 January -- 2015 May/
+- /Pit3/ :: /2011 January -- 2015 May/
      
-     Used Scala and Java.
+     I was the main developer of Pit3, a log visualization tool widely used at Ericsson. The application is written in /Scala/ and uses JFreeChart as its graph library. It is able to parse a variety of in-house log-formats used by Ericsson and render data in real-time. Is has some interesting solutions to reduce memory usage in the JVM, due to the huge amount of log data it process. The program also has some unique functions for interactively exploring log-data and finding relations between different behaviors in a system.
 
-- /Port Erlang to NIF/ :: /2010 June -- 2010 September/ 
+- /Erlang to C/ :: /2010 June -- 2010 September/ 
      
-     Used Erlang and C.
+     I ported an /Erlang/ library to /C/ at Ericsson. The goal was to increase its performance, but also explore the ability to reload NIFs (Erlang functions implementd in C) in an Erlang system during run-time.
      
-- /Examine ETS in Erlang// :: /2010 March  -- 2011 January/ 
+- /Examine ETS in Erlang/ :: /2010 March  -- 2011 January/ 
 
-     Used Erlang.
+     I explored the memory consumption of data stored in ETS-tables at Ericsson. The work resulted in a proposal to OTP, that implemented a change, that is a part of the current OTP version.
 
-- /Assistant at Antikvariat PAN/ :: /2007 August -- 2014 January/
+
+* Just for fun
+
+Here are some of the coding I have done on my free time. 
+
+- /Worklog/ :: /2015 May -- 2015 September/ 
+
+     A prototype for a web-application for reporting time and assign jobs. It is designed to be very modular and is a real-time multiuser system. It is a mix between facebook and google-docs.
+
+- /puzzle/ :: /2014 March -- 2014 April/
+     The A-Star algorithm solving n-puzzle problem, visualized with /d3.js/. http://andrejlamov.github.io/puzzle/
      
-     Manage books/movie posters and guide/help customers.
+- /isolol/ :: /2015 December -- 2016 January/
 
-* Education
-- /Chalmers/ :: /2008 September -- 2016 April/ 
+     Fun with isometric rendering and /canvas/. http://andrejlamov.github.io/isolol/
+
+- /portenv/ :: /2016 January -- 2016 February/
+     Portable environment based on arch-linux. Enables the ability to use the package manager pac-man on any linux host, by running a minimal arch and a fake-root in the home directory. https://github.com/andrejlamov/portenv
+
+- /cursed-tetris/ :: /2015 January -- 2015 February/
+
+     Tetris written in C using ncurses. https://github.com/andrejlamov/cursed-tetris
+     
+     
 * Cover Letter
 Hello. My name is Andrej Lamov. I need work.
