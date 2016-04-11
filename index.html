@@ -9,6 +9,8 @@
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://momentjs.com/downloads/moment-with-locales.min.js" charset="utf-8"></script>
     <script src="cv2json.js" charset="utf-8"></script>
+
+    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     <link href='style.css' rel='stylesheet' type='text/css'>
@@ -33,7 +35,9 @@
    });
    
    function timeline(id, data) {
-   
+
+       var freeze = false;
+       
        var color = d3.scale.category10();
        
        var x = d3.time.scale();
@@ -58,14 +62,21 @@
        x.domain([min_date, max_date]);
        y.domain(data.map(function(d) { return d.title }));
            
-       svg.selectAll('.job')
+       svg.on('click', function() {
+           d3.select(this).transition().style('opacity', freeze ? 1 : 0.5);
+           freeze = !freeze;
+       }).selectAll('.job')
           .data(data)
           .enter()
           .append('g')
           .on('mouseover', function(d, i) {
+              if(freeze) return;
+              
               d3.select('#description').html(d.description);
           })
           .on('mouseout', function(d) {
+              if(freeze) return;
+              
               d3.select('#description').text("");
           })
           .attr('class', 'job')
@@ -118,14 +129,18 @@
 
        d3.selectAll(id + ' .y.axis .tick')
          .on('mouseover', function(_,i) {
+             if(freeze) return;
+             
              var d = d3.selectAll(id + ' .job ').data()[i];
              d3.select('#description').html(d.description);
          })
          .on('mouseout', function(d,i) {
+             if(freeze) return;
+
              d3.select('#description').text("");
          });
 
-       d3.select(window).on('resize', resize)
+       d3.select(window).on('resize', resize);
    };
   </script>
 </html>
