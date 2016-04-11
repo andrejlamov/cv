@@ -59,7 +59,7 @@ function cv2json(d) {
                     start: moment(match[2],format).toDate(),
                     stop: stop,
                     title: match[1],
-                    description: ""
+                    description: "",
                 });
                 break;
 
@@ -76,10 +76,10 @@ function cv2json(d) {
 
                 d0 = data[data.length-1];
                 d1 = d0.d;
-                if(d1.length == 0) d0.description += html;
+                if(d1.length == 0) d0.description += ('\n ' + html);
                 else {
                     d = d1[d1.length-1];
-                    if(d) d.description += html;
+                    if(d) d.description += ('\n' + html);
                 }
                 break;
 
