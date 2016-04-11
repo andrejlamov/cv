@@ -63,12 +63,22 @@ function cv2json(d) {
                 break;
 
             case 'content':
+                // convert org-mode font-types to html
+                html = line.trim()
+                    .replace(/(http.*?).+|\/(.*?)\//g, function(str,m0) {
+                        if(m0 == 'http')
+                            return '<a href="' + str + '">' + str + '</a>'
+                        else
+                            return '<b>' + str.substring(1, str.length - 1) + '</b>'
+                    });
+                
+
                 d0 = data[data.length-1];
                 d1 = d0.d;
-                if(d1.length == 0) d0.description += line.trim();
+                if(d1.length == 0) d0.description += html;
                 else {
                     d = d1[d1.length-1];
-                    if(d) d.description += line.trim();
+                    if(d) d.description += html;
                 }
                 break;
 
