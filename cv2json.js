@@ -53,9 +53,10 @@ function cv2json(d) {
                 break;
 
             case 'list_item':
-                var stop = match[3] == 'current' ? new Date() : new Date(match[3]);
+                var format = 'YYYY-MMM';
+                var stop = match[3] == 'current' ? new Date() : moment(match[3], format).toDate();
                 data[data.length-1].d.push({
-                    start: new Date(match[2]),
+                    start: moment(match[2],format).toDate(),
                     stop: stop,
                     title: match[1],
                     description: ""
