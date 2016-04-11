@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="cv2json.js" charset="utf-8"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
     <link href='style.css' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -19,7 +21,8 @@
 
    d3.text('./cv.org', function(cv) {
        var data = cv2json(cv);
-       var d = data['Work Experience'].d
+       var d = data['Education'].d
+                                      .concat(data['Work Experience'].d)
                                       .concat(data['Programming Experience'].d)
                                       .concat(data['Hobby Projects'].d);
        timeline('#timeline', d);
@@ -121,89 +124,5 @@
 
        d3.select(window).on('resize', resize)
    };
-
-   function cv2json(d) {
-
-       var regexps = [
-           {r: /#\+BEGIN_.*/, name: 'begin_src'},
-           {r: /#\+END_.*/, name: 'end_src'},
-           {r: /#.*/, name: 'ignore'},
-           {r: /(\*+)\s+(.*)/, name: 'level'},
-           {r: /\-\s+\/(.*)\/\s+\:\:\s+\/(.*)\s--\s(.*)\//, name: 'list_item'},
-           {r: /(.*)/, name: 'content'},
-
-       ];
-       
-       var data = []; 
-
-       var in_src_block = false;
-       d.split('\n').forEach(function(line) {
-           regexps.some(function(exp) {
-              
-               var match = exp.r.exec(line.trim());
-               if(!match || match[0] == "") return false;
-
-               switch (exp.name) {
-                   case 'begin_src':
-                       in_src_block = true;
-                       break;
-
-                   case 'end_src':
-                       in_src_block = false;
-                       break;
-               }
-
-               if(in_src_block) return true;
-
-               switch (exp.name) {
-                   case 'ignore':
-                       break;
-
-                   case 'level':
-                       data.push({
-                           level: match[1].length,
-                           name: match[2],
-                           d: [],
-                           description: ""
-                       });
-                       break;
-
-                   case 'list_item':
-                       var stop = match[3] == 'current' ? new Date() : new Date(match[3]);
-                       data[data.length-1].d.push({
-                           start: new Date(match[2]),
-                           stop: stop,
-                           title: match[1],
-                           description: ""
-                       });
-                       break;
-
-                   case 'content':
-                       console.log(exp.name, line.trim())
-                       d0 = data[data.length-1];
-                       d1 = d0.d;
-                       if(d1.length == 0) d0.description += line.trim();
-                       else {
-                           d = d1[d1.length-1];
-                           if(d) d.description += line.trim();
-                       }
-                       break;
-
-                   default:
-                       break;
-               };
-               
-               return true;
-           })
-       });
-
-       var result = {};
-       data.forEach(function(d) {
-           result[d.name] = d;
-       });
-       
-       return result;
-   }
-
   </script>
 </html>
