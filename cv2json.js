@@ -12,7 +12,7 @@ function cv2json(d) {
         // # * Work Experiencew
         {r: /(\*+)\s+(.*)/, name: 'level'},
 
-        // # - Chalmers :: 2008 -- current
+        // # - Chalmers :: /2008 -- current/
         {r: /\-\s+(.*)\s+\:\:\s+\/(.*)\s--\s(.*)\//, name: 'list_item'},
 
         // .*
@@ -23,7 +23,6 @@ function cv2json(d) {
 
     var in_src_block = false;
     d.split('\n').forEach(function(line) {
-        console.log(data)
         regexps.some(function(exp) {
             
             var match = exp.r.exec(line.trim());
@@ -41,7 +40,6 @@ function cv2json(d) {
 
             if(in_src_block) return true;
 
-            console.log(exp.name)
             switch (exp.name) {
             case 'ignore':
                 break;
@@ -56,7 +54,6 @@ function cv2json(d) {
 
             case 'list_item':
                 var stop = match[3] == 'current' ? new Date() : new Date(match[3]);
-                console.log(match)
                 data[data.length-1].d.push({
                     start: new Date(match[2]),
                     stop: stop,
@@ -66,7 +63,6 @@ function cv2json(d) {
                 break;
 
             case 'content':
-                console.log(exp.name, line.trim())
                 d0 = data[data.length-1];
                 d1 = d0.d;
                 if(d1.length == 0) d0.description += line.trim();
