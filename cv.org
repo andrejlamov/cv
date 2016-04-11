@@ -85,6 +85,7 @@
      A prototype for a web-application for reporting time and assign jobs. It is designed to be very modular and is a real-time multiuser system. It is a mix between facebook and google-docs.
 
 - puzzle :: /2014 March -- 2014 April/
+
      The A-Star algorithm solving n-puzzle problem, visualized with /d3.js/. http://andrejlamov.github.io/puzzle/
      
 - isolol :: /2015 December -- 2016 January/
@@ -92,6 +93,7 @@
      Fun with isometric rendering and /canvas/. http://andrejlamov.github.io/isolol/
 
 - portenv :: /2016 January -- 2016 February/
+
      Portable environment based on arch-linux. Enables the ability to use the package manager pac-man on any linux host, by running a minimal arch and a fake-root in the home directory. https://github.com/andrejlamov/portenv
 
 - cursed-tetris :: /2015 January -- 2015 February/
