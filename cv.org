@@ -1,20 +1,30 @@
-#+AUTHOR: Andrej Lamov
-#+TITLE: CV
-#+AUTHOR: Andrej Lamov
-#+OPTIONS: H:2 toc:nil num:nil 
+#+LaTeX_CLASS: cv
+#+OPTIONS: H:3 toc:nil num:nil author:nil timestamp:nil title:nil
 
-* Introduction
+#+BEGIN_LATEX
+\begin{flushleft}
+  \bfseries\Large Curriculum Vitae\hfill Andrej Lamov\normalfont
+\end{flushleft}
 
-
+\vspace{-12pt}%
+\begin{flushright}
+  Riksdalersgatan 25C\\
+  414 81 Gothenburg\\
+  880930-9076\\
+  andrej.lamov@gmail.com\\
+  \hrulefill
+\end{flushright}
+#+END_LATEX
 
 * Education
+
 - Chalmers :: /2008 September - current/
 
      I study the master program /algorithms, languages and logic/, a specialization on Computer Science at Chalmers. I am about to finish my master thesis and will be done with all my courses at the end of this summer. Interesting courses for this job: /functional programming/, /advanced functional programming/, /parallel functional programming/, /algorithms/, /advanced algorithms/, /discrete optimization/, /types for programs and proofs/, /ai/ and /concurrent programming/. In theses courses I have used /haskell/, /agda/, /python/, /erlang/, /c/ and /java/.
 
 * Work Experience
 
-- /Master Thesis/ :: /2015 October -- current/ 
+- Master Thesis :: /2015 October -- current/
      
      The thesis explores different representations of string data in Erlang. Its context is Ericssons SGSN-MME, a massive concurrent Erlang system, running hundred of thousands of Erlang processes. I have examined Erlang and its virtual machine in detail, to find ways of working with strings more efficient. During the thesis I have mainly used /Erlang/, but also /C/, making changes to Erlangs virtual machine, that is written in C. I have visited the OTP team, the main developers of Erlang, in Stockholm and received feedback on the ideas presented in the thesis.
 
@@ -38,9 +48,7 @@
 
      Collect donations through telemarketing.
   
-     
 * Programming Experience
-
 
 - /Pit4 prototype/ :: /2015 January -- 2015 February/ 
 
@@ -70,10 +78,7 @@
 
      I explored the memory consumption of data stored in ETS-tables at Ericsson. The work resulted in a proposal to OTP, that implemented a change, that is a part of the current OTP version.
 
-
-* Just for fun
-
-Here are some of the coding I have done on my free time. 
+* Hobby Projects
 
 - /Worklog/ :: /2015 May -- 2015 September/ 
 
@@ -93,6 +98,4 @@ Here are some of the coding I have done on my free time.
 
      Tetris written in C using ncurses. https://github.com/andrejlamov/cursed-tetris
      
-     
-* Cover Letter
-Hello. My name is Andrej Lamov. I need work.
+

@@ -21,7 +21,7 @@
        var data = cv2json(cv);
        var d = data['Work Experience'].d
                                       .concat(data['Programming Experience'].d)
-                                      .concat(data['Just for fun'].d);
+                                      .concat(data['Hobby Projects'].d);
        timeline('#timeline', d);
 
    });
@@ -125,22 +125,37 @@
    function cv2json(d) {
 
        var regexps = [
+           {r: /#\+BEGIN_.*/, name: 'begin_src'},
+           {r: /#\+END_.*/, name: 'end_src'},
            {r: /#.*/, name: 'ignore'},
            {r: /(\*+)\s+(.*)/, name: 'level'},
            {r: /\-\s+\/(.*)\/\s+\:\:\s+\/(.*)\s--\s(.*)\//, name: 'list_item'},
-           {r: /(.*)/, name: 'content'}
+           {r: /(.*)/, name: 'content'},
+
        ];
        
        var data = []; 
 
+       var in_src_block = false;
        d.split('\n').forEach(function(line) {
            regexps.some(function(exp) {
-               
+              
                var match = exp.r.exec(line.trim());
                if(!match || match[0] == "") return false;
 
                switch (exp.name) {
+                   case 'begin_src':
+                       in_src_block = true;
+                       break;
 
+                   case 'end_src':
+                       in_src_block = false;
+                       break;
+               }
+
+               if(in_src_block) return true;
+
+               switch (exp.name) {
                    case 'ignore':
                        break;
 
@@ -164,6 +179,7 @@
                        break;
 
                    case 'content':
+                       console.log(exp.name, line.trim())
                        d0 = data[data.length-1];
                        d1 = d0.d;
                        if(d1.length == 0) d0.description += line.trim();
