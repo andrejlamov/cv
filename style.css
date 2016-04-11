@@ -7,11 +7,15 @@ body {
     color:#444;
     padding:0 10px;
     shape-rendering: crispEdges;
+    text-align: center;
 }
 
 h1,h2,h3 {
     line-height:1.2;
-    text-align: center;
+}
+
+.link {
+    font-size: 12px;
 }
 
 #description {
