@@ -63,7 +63,12 @@
        y.domain(data.map(function(d) { return d.title }));
            
        svg.on('click', function() {
-           d3.select(this).transition().style('opacity', freeze ? 1 : 0.5);
+           d3.select(this)
+               .transition()
+               .style('opacity', freeze ? 1 : 0.5);
+           d3.select('#description')
+               .transition()
+               .style('font-size', freeze ? '18px' : '22px');
            freeze = !freeze;
        }).selectAll('.job')
           .data(data)
