@@ -117,10 +117,8 @@
              .attr('transform', function(_,i) {
                  return 'translate(' + width + ',0)'
              })
-             .call(y_axis);
-
-
-           d3.selectAll(id + ' .y.axis .tick')
+             .call(y_axis)
+             .selectAll('.tick')
              .attr('transform', function(_, i) {
                  var d = data[i];
                  var fst = d3.select(this).attr('transform');
