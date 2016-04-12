@@ -95,7 +95,7 @@
 
 - Worklog :: /2015 May -- 2015 September/ 
      
-     A prototype web-application for reporting time and assigning tasks. It is designed to be modular and is a real-time multi-user system. It uses /web-sockets/ for real-time communication, and has a /REST/ API and a publish-subscribe system, both reachable through web-sockets and GET and POST-requests.
+     A prototype web-application for reporting time and assigning tasks. It is designed to be modular and is a real-time multi-user system. It uses /web-sockets/ for real-time communication, and has a /REST/ API and a /publish-subscribe/ system, both reachable through web-sockets and GET and POST-requests.
 
 - you-can-call-me-cal :: /2015 March -- 2015 April/
 
