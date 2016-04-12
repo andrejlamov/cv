@@ -103,8 +103,10 @@
            
            var padding = 40;
            var screen_limit = 500;
-           
-           var width  = parseInt(d3.select(id).style('width')) - padding;
+
+           var real_width = parseInt(d3.select(id).style('width')) - padding;
+           var width  = real_width;
+
            if(width > screen_limit) {
                width = width - 400;
            }
@@ -121,7 +123,7 @@
            d3.select(id + ' .y.axis')
              .attr('transform', function(_,i) {
                  var x = width;
-                 if (width < screen_limit) {
+                 if (real_width < screen_limit) {
                      x = padding;
                  }
                  return 'translate(' + x + ',0)'
@@ -130,7 +132,7 @@
              .selectAll('.tick')
              .attr('transform', function(_, i) {
                  var fst = d3.select(this).attr('transform');
-                 if (width < screen_limit) {
+                 if (real_width < screen_limit) {
                      return fst;;
                  }
                  var d = data[i];
