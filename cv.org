@@ -51,6 +51,8 @@
   
 * Programming Experience
 
+References provided upon request.
+
 - Pit4 prototype :: /2015 January -- 2015 February/ 
 
      A prototype web-application for log visualization at Ericsson. The motivation behind this application was to solve the problem of rendering interactive graphs with a big amount of data-points in a browser. The application automatically adjusts the level-of-detail without loss of significant data-point nor performance. The backend is based on the /Python/ libraries /Flask/ and /Pandas/, and the frontend on /D3.js/.
