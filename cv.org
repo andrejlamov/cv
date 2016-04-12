@@ -12,6 +12,7 @@
   414 81 Gothenburg\\
   880930-9076\\
   andrej.lamov@gmail.com\\
+  https://github.com/andrejlamov\\
   \hrulefill
 \end{flushright}
 #+END_LATEX
