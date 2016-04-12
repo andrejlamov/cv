@@ -116,13 +116,20 @@
 
            d3.select(id + ' .y.axis')
              .attr('transform', function(_,i) {
-                 return 'translate(' + width + ',0)'
+                 var x = width;
+                 if (width < 500) {
+                     x = padding;
+                 }
+                 return 'translate(' + x + ',0)'
              })
              .call(y_axis)
              .selectAll('.tick')
              .attr('transform', function(_, i) {
-                 var d = data[i];
                  var fst = d3.select(this).attr('transform');
+                 if (width < 500) {
+                     return fst;;
+                 }
+                 var d = data[i];
                  var tx = -(width - x(d.stop));
                  return fst + ' translate(' + tx + ',0)'
              })
