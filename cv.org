@@ -99,6 +99,7 @@
 - you can call me cal :: /2015 March - 2015 April/
 
      A prototype of a calendar visualization written in /d3.js/. The events in the calendar are packed to take up as little space as possible.
+
      http://andrejlamov.github.io/you_can_call_me_cal/
 
 - cursed-tetris :: /2015 January -- 2015 February/
