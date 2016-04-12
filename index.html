@@ -113,6 +113,7 @@
            d3.select(id + ' .x.axis')
              .attr('transform', 'translate(0,' + height + ')')
              .call(x_axis);
+
            d3.select(id + ' .y.axis')
              .attr('transform', function(_,i) {
                  return 'translate(' + width + ',0)'
