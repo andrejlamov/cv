@@ -21,7 +21,7 @@
 
 - MSc (Civilingenjör) Computer Science at Chalmers University of Technology :: /2008 -- 2016/
 
-     I study the Master's Program /Computer Science - algorithms, languages and logic/. Relevant courses: /functional programming/, /advanced functional programming/, /parallel functional programming/, /Algorithms/, /Advanced Algorithms/, /Discrete Optimization/, /Types for Programs and Proofs/, /AI/ and /Concurrent Programming/. In these courses I have used /Haskell/, /Python/, /Erlang/, /C/, /Agda/ and /Java/.
+     I study the Master's Program /Computer Science - Algorithms, Languages and Logic/. Relevant courses: /Functional Programming/, /Advanced Functional Programming/, /Parallel Functional Programming/, /Algorithms/, /Advanced Algorithms/, /Discrete Optimization/, /Types for Programs and Proofs/, /AI/ and /Concurrent Programming/. In these courses I have used /Haskell/, /Python/, /Erlang/, /C/, /Agda/ and /Java/.
 
 * Work Experience
 
