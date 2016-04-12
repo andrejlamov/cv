@@ -103,7 +103,7 @@
            
            var padding = 40;
            
-           var width  = parseInt(d3.select(id).style('width')) - padding;
+           var width  = parseInt(d3.select(id).style('width')) - padding - 400;
            var height  = parseInt(d3.select(id).style('height')) - padding;
            
            x.range([padding, width]);
@@ -114,7 +114,7 @@
              .attr('transform', 'translate(0,' + height + ')')
              .call(x_axis);
            d3.select(id + ' .y.axis')
-             .attr('transform', 'translate(' + padding + ',0)')
+             .attr('transform', 'translate(' + width + ',0)')
              .call(y_axis);
            
            
