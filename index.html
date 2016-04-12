@@ -122,11 +122,13 @@
 
            d3.select(id + ' .y.axis')
              .attr('transform', function(_,i) {
-                 var x = width;
+                 var tx = width;
                  if (real_width < screen_limit) {
-                     x = padding;
+                     tx = padding;
                  }
-                 return 'translate(' + x + ',0)'
+                 tx -= 8;
+                 var ty = 1;
+                 return 'translate(' + tx + ',' + ty + ')'
              })
              .call(y_axis)
              .selectAll('.tick')
