@@ -1,0 +1,29 @@
+body {
+    font-family: 'Roboto Slab', serif;
+    margin:40px auto;
+    max-width:800px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding:010px;
+}
+
+h1,h2,h3 {
+    line-height:1.2;
+}
+
+i {
+    font-weight: bold;
+}
+
+.head {
+    padding-bottom: 6em;
+}
+.contact {
+    font-size:12px;
+    float:right;
+}
+
+.title {
+    float:left;
+}

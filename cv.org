@@ -1,6 +1,22 @@
 #+LaTeX_CLASS: cv
-#+OPTIONS: H:3 toc:nil num:nil author:nil timestamp:nil title:nil
+#+OPTIONS: H:3 toc:nil num:nil author:nil timestamp:nil title:nil html-postamble:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="cv.css" />
+#+HTML_HEAD: <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
 
+#+BEGIN_HTML
+<div class="head">
+<div class="title">
+<h1>Curriculum Vitae</h1>
+</div>
+<div class="contact">
+Riksdalersgatan 25C <br>
+414 81 Gothenburg<br>
+073 767 50 03<br>
+andrej.lamov@gmail.com<br>
+https://github.com/andrejlamov<br>
+</div>
+</div>
+#+END_HTML
 #+BEGIN_LATEX
 \begin{flushleft}
   \bfseries\Large Curriculum Vitae\hfill Andrej Lamov\normalfont
