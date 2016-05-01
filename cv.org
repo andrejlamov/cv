@@ -89,7 +89,7 @@ https://github.com/andrejlamov<br>
 
 - Erlang to C :: /2010 June -- 2010 September/ 
      
-     I ported an /Erlang/ library to /C/ at Ericsson. The goal was to increase libraries performance, but also to explore the ability to reload /NIFs/ (Erlang functions implemented in C) in an Erlang system during run-time.
+     I ported an /Erlang/ library to /C/ at Ericsson. The goal was to increase the performance, but also to explore the ability to reload /NIFs/ (Erlang functions implemented in C) in an Erlang system during run-time.
      
 - Examined ETS in Erlang :: /2010 March  -- 2011 January/ 
 
