@@ -48,7 +48,7 @@
        var x_axis = d3.svg.axis()
                       .scale(x)
                       .orient("bottom")
-                      .tickFormat(d3.time.format('%y'));
+                      .tickFormat(d3.time.format('%Y'));
            
        var y_axis = d3.svg.axis()
                       .scale(y)
@@ -103,13 +103,15 @@
        var resize = function() {
            
            var padding = 40;
-           var screen_limit = 600;
-
+           var screen_limit = 700;
+           var font_width = 4.1;
+           
+           var longest_text = d3.max(data.map(function(d) { return d.title.length})) * font_width;
            var real_width = parseInt(d3.select(id).style('width')) - padding;
            var width  = real_width;
 
            if(width > screen_limit) {
-               width = width - 400;
+               width = width - longest_text;
            }
            var height  = parseInt(d3.select(id).style('height')) - padding;
            
