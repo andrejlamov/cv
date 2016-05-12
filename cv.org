@@ -96,6 +96,11 @@ https://github.com/andrejlamov<br>
      I explored the memory consumption of data stored in /ETS/-tables at Ericsson. The work resulted in a proposal for improvement to /OTP/, the main developers of /Erlang/. OTP implemented this change, and it is currently a part of the current OTP version.
 
 * Hobby Projects
+- deskel :: /2016 April -- 2016 May/
+
+     A multiplexer for Emacs desktops. Inspired by /gnu screen/ and /tmux/. I applied /Test-Driven Development/ by building a simple test enviroment that runs tests in an other Emacs instance and communicates withe main Emacs you are developing in. 
+     
+     https://github.com/andrejlamov/deskel
 
 - portenv :: /2016 January -- 2016 February/
 
