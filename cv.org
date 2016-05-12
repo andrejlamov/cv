@@ -98,7 +98,8 @@ https://github.com/andrejlamov<br>
 * Hobby Projects
 - deskel :: /2016 April -- 2016 May/
 
-     A multiplexer for Emacs desktops. Inspired by /gnu screen/ and /tmux/. I applied /Test-Driven Development/ by building a simple test enviroment that runs tests in an other Emacs instance and communicates withe main Emacs you are developing in. 
+
+     A multiplexer for Emacs desktops. Inspired by /gnu screen/ and /tmux/. I applied /Test-Driven Development/ by building a simple test environment that runs tests in an other Emacs instance, and communicates with the main Emacs I am developing in. 
      
      https://github.com/andrejlamov/deskel
 
