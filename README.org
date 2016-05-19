@@ -15,5 +15,5 @@
 
 Ref: https://lists.gnu.org/archive/html/emacs-orgmode/2015-09/msg00453.html
 * css
-- ~cv.css~ is for org exporta
+- ~cv.css~ is for org export
 - ~style.css~ is for ~index.html~
