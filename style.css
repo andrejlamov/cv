@@ -8,6 +8,7 @@ body {
     padding:0 10px;
     shape-rendering: crispEdges;
     text-align: center;
+    overflow-y: scroll;
 }
 
 h1,h2,h3 {
@@ -39,7 +40,6 @@ svg text {
 .axis path,
 .axis line {
     fill: none;
-    crispEdges: true;
     stroke: #444;
 }
 
