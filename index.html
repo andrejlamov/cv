@@ -168,7 +168,10 @@
 
            job.selectAll('text')
               .attr('x', function(d) {
-                 return x(d.stop) - x(d.start) + 2;
+                  if (real_width < screen_limit)
+                      return -x(d.start) + padding;
+                  
+                  return x(d.stop) - x(d.start) + 2;
               });
 
        };
