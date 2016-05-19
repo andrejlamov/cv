@@ -29,20 +29,17 @@ svg {
     min-width: 350px;
 }
 
-.y.axis .tick line {
-    display: none;
-}
-
 svg text {
     fill: #444;
 }
 
-.axis text {
+.axis text, .job text {
     font-size: 10px;
 }
 .axis path,
 .axis line {
     fill: none;
+    crispEdges: true;
     stroke: #444;
 }
 

@@ -37,7 +37,10 @@
    
    function timeline(id, data) {
 
-       var freeze = false;
+
+       var freezed_screen = false;
+       var focused_job = null;
+
        
        var color = d3.scale.category20();
        
@@ -50,10 +53,7 @@
                       .orient("bottom")
                       .tickFormat(d3.time.format('%Y'));
            
-       var y_axis = d3.svg.axis()
-                      .scale(y)
-                      .orient("right");
-       
+
        var svg = d3.select(id);
        
 
@@ -62,41 +62,73 @@
            
        x.domain([min_date, max_date]);
        y.domain(data.map(function(d) { return d.title }));
-           
-       svg.on('click', function() {
-           d3.select(this)
-               .transition()
-               .style('opacity', freeze ? 1 : 0.5);
+
+       var unfreeze = function() {
+           d3.selectAll('.job')
+             .transition()
+             .style('opacity', 1);
+           freezed_screen = false;
+           d3.select('#description').html("");
+       };
+
+       var freeze = function(job) {
+           d3.selectAll('.job')
+             .transition()
+             .style('opacity', 0.5);
+           job.transition()
+              .style('opacity', 1);
+
            d3.select('#description')
-               .transition()
-               .style('font-size', freeze ? '18px' : '22px');
-           freeze = !freeze;
-       }).selectAll('.job')
+             .html(job.datum().description);
+           freezed_screen = true;
+       };
+
+       var job = svg.on('click', unfreeze)
+          .selectAll('.job')
           .data(data)
           .enter()
           .append('g')
+          .on('click', function(d,i) {
+              if(i === focused_job) {
+                  unfreeze();
+                  d3.select('#description').transition().style('font-size', 18);
+                  focused_job = null;
+              } else {
+                  freeze(d3.select(this));
+                  d3.select('#description').transition().style('font-size', 24);
+                  focused_job = i;
+              }
+              d3.event.stopPropagation();
+          })
           .on('mouseover', function(d, i) {
-              if(freeze) return;
+              if(freezed_screen) return;
               
               d3.select('#description').html(d.description);
           })
           .on('mouseout', function(d) {
-              if(freeze) return;
+              if(freezed_screen) return;
               
+              d3.select('#description').style('font-size', 18);
               d3.select('#description').text("");
+
           })
           .attr('class', 'job')
-          .append('rect')
-          .attr('fill', function(d) {
-              return color(d.title);
+
+       job.append('rect')
+                    .attr('fill', function(d) {
+                        return color(d.title);
+                    })
+                    .attr('opacity', function(d) {
+                        return 0.7;
+                    });
+
+       job.append('text')
+          .text(function(d) {
+              return d.title;
           })
-          .attr('opacity', function(d) {
-              return 0.7;
-          });
-       
-       svg.append('g')
-          .attr('class', 'y axis');
-       
+          .attr('y', '1em')
+          .attr('dy', -1);
+
        svg.append('g')
           .attr('class', 'x axis');
        
@@ -123,55 +155,25 @@
              .attr('transform', 'translate(0,' + height + ')')
              .call(x_axis);
 
-           d3.select(id + ' .y.axis')
-             .attr('transform', function(_,i) {
-                 var tx = width;
-                 if (real_width < screen_limit) {
-                     tx = padding;
-                 }
-                 tx -= 8;
-                 var ty = 1;
-                 return 'translate(' + tx + ',' + ty + ')'
-             })
-             .call(y_axis)
-             .selectAll('.tick')
-             .attr('transform', function(_, i) {
-                 var fst = d3.select(this).attr('transform');
-                 if (real_width < screen_limit) {
-                     return fst;;
-                 }
-                 var d = data[i];
-                 var tx = -(width - x(d.stop));
-                 return fst + ' translate(' + tx + ',0)'
-             })
-           
-           d3.selectAll(id + ' .job')
+           var job = d3.selectAll(id + ' .job')
              .attr('transform', function(d) {
                  return 'translate(' + x(d.start) + ',' + y(d.title) + ')';
              });
-           
-           d3.selectAll(id + ' .job rect')
+
+           job.selectAll('rect')
              .attr('height', y.rangeBand)
              .attr('width', function(d) {
                  return x(d.stop) - x(d.start);
-             });
+             })
+
+           job.selectAll('text')
+              .attr('x', function(d) {
+                 return x(d.stop) - x(d.start) + 2;
+              });
+
        };
        
        resize();
-
-       d3.selectAll(id + ' .y.axis .tick')
-         .on('mouseover', function(_,i) {
-             if(freeze) return;
-             
-             var d = d3.selectAll(id + ' .job ').data()[i];
-             d3.select('#description').html(d.description);
-         })
-         .on('mouseout', function(d,i) {
-             if(freeze) return;
-
-             d3.select('#description').text("");
-         });
-
        d3.select(window).on('resize', resize);
    };
   </script>
