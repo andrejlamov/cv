@@ -67,7 +67,10 @@
            d3.selectAll('.job')
              .transition()
              .style('opacity', 1);
+
            freezed_screen = false;
+           focused_job = null;
+
            d3.select('#description').html("");
        };
 
@@ -80,6 +83,7 @@
 
            d3.select('#description')
              .html(job.datum().description);
+
            freezed_screen = true;
        };
 
